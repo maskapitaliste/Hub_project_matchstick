@@ -19,8 +19,9 @@ int c_match(int *line, int length)
 
 int gameplay(info_t *info)
 {
+    print_board(info->board, info->ligne);
+
     while (1) {
-        print_board(info->board, info->ligne);
         print("\nYour turn:\n");
         player_turn(info);
         print_board(info->board, info->ligne);
@@ -29,6 +30,7 @@ int gameplay(info_t *info)
             return 2;
         }
         ai_turn(info);
+        print_board(info->board, info->ligne);
         if (check_victory(info) == 1) {
             print("I lost... snif... but I'll get you next time!!\n");
             return 1;
