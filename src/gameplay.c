@@ -21,8 +21,9 @@ int gameplay(info_t *info)
 {
     while (1) {
         print_board(info->board, info->ligne);
-        print("Your turn:\n");
+        print("\nYour turn:\n");
         player_turn(info);
+        print_board(info->board, info->ligne);
         if (check_victory(info) == 1) {
             print("You lost, too bad...\n");
             return 2;

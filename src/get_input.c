@@ -60,4 +60,5 @@ void player_turn(info_t *info)
     int matches = get_valid_matches(info, line);
 
     removes(info, line, matches);
+    print("Player removed %d match(es) from line %d\n", matches, line);
 }

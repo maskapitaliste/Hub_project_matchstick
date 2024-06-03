@@ -53,6 +53,7 @@ void ai_turn(info_t *info)
     int l = 0;
     int m = 0;
 
+    print("\nAI's turn...\n");
     srand(time(NULL));
     find_best_move(info, &l, &m);
     if (removes(info, l, m) == 0) {
