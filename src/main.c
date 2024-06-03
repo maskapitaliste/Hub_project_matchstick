@@ -22,17 +22,19 @@ int pdef(int argc, char **argv)
     return 0;
 }
 
-
-int main   (int argc, char **argv)
+int main(int argc, char **argv)
 {
+    info_t info;
+
     if (pdef(argc, argv) != 0) {
-        print("USAGE\n ./matchstick lines max_matches\n\n DESCRIPTION\n lines");
-        print("number of lines of the game, greater than 1\n max_matches maximum");
+        print("USAGE\n ./matchstick lines max_matches");
+        print("\n\n DESCRIPTION\n lines number of lines of ");
+        print("the game, greater than 1\n max_matches maximum");
         print("number of matches that can be taken out each");
         print("turn\n");
-    }
         return (84);
-    info_t info = launch_game( argc ,argv);
+    }
+    info = launch_game(argc, argv);
     while (gameplay(&info) == 0) {
     }
     return (0);

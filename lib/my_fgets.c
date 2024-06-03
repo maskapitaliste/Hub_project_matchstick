@@ -6,10 +6,14 @@
 */
 #include "../include/my.h"
 
+
 static int read_char(char *ch)
 {
     int bytesRead = read(STDIN_FILENO, ch, 1);
 
+    if (bytesRead < 0) {
+        perror("Error reading the entry");
+    }
     return bytesRead;
 }
 
@@ -24,28 +28,32 @@ static int is_newline(char ch)
     return (ch == '\n');
 }
 
-static int read_and_append(char **ptr, int *bytesRead)
+char *return_fgets_t(int bR, char *b)
 {
-    char ch;
-
-    if (read_char(&ch) <= 0) {
-        return 0;
+    if (bR == 0) {
+        return NULL;
+    } else {
+        b[bR] = '\0';
+        return b;
     }
-    append_char(ptr, ch);
-    (*bytesRead)++;
-    return !is_newline(ch);
 }
 
-char *my_fgets(char *buffer, int size)
+char *my_fgets(char *b, int size)
 {
-    char *ptr = buffer;
-    int bytesRead = 0;
+    char *ptr = b;
+    int bR = 0;
+    char ch;
 
-    while (bytesRead < size - 1) {
-        if (!read_and_append(&ptr, &bytesRead)) {
+    while (bR < size - 1) {
+        if (read_char(&ch) <= 0) {
+            return return_fgets_t(bR, b);
+        }
+        append_char(&ptr, ch);
+        bR++;
+        if (is_newline(ch)) {
             break;
         }
     }
     *ptr = '\0';
-    return (bytesRead == 0 && size > 0) ? NULL : buffer;
+    return b;
 }

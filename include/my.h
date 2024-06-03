@@ -8,20 +8,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
+#include <time.h>
 
 #ifndef HASHTABLE_H
     #define HASHTABLE_H
 
 // tools
 
-typedef struct info
-{
+typedef struct info {
     int Max;
     int ligne;
     int **board;
+    int *matches;
 } info_t;
 
 int my_strlen(char *str);
@@ -45,5 +43,18 @@ int my_putstr(char const *str);
 
 info_t launch_game(int argc, char **argv);
 int gameplay(info_t *info);
+void print_board(int **board, int lines);
+char *my_fgets(char *buffer, int size);
+int removes(info_t *info, int line, int matches);
+int check_victory(info_t *info);
+void ai_turn(info_t *info);
+int get_int_input(char *prompt);
+int get_valid_line(info_t *info);
+int get_valid_matches(info_t *info, int line);
+int v_c_match(info_t *info, int matches);
+int is_valid_line(info_t *info, int line);
+int is_valid_number(char *buffer);
+void player_turn(info_t *info);
+int c_match(int *line, int length);
 
 #endif

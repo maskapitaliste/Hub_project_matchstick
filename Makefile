@@ -11,6 +11,14 @@ SRC	=	mini_printf/mini_printf.c	\
 		mini_printf/my_putchar.c	\
 		mini_printf/my_putstr.c	\
 		src/main.c \
+		src/launch_game.c \
+		src/gameplay.c \
+		src/check.c \
+		src/get_input.c \
+		src/ai.c \
+		src/is_valid.c \
+		src/print.c \
+		src/remove.c \
 		lib/len_tab.c \
 		lib/strlen.c \
 		lib/strcmp.c \

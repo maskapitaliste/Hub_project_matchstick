@@ -7,32 +7,30 @@
 
 #include "../include/my.h"
 
-
-
-int gameplay(info_t *info) {
-    int line = 0;
-    int matches = 0;
-
-    while (1) {
-        print("Your turn:\n");
-
-        while (1) {
-            line = get_int_input("Line: ");
-            if (line >= 1 && line <= info->Max[0]) {
-                break;
-            } else {
-                print("Error: this line is out of range\n");
-            }
+int c_match(int *line, int length)
+{
+    for (int i = 0; i < length; i++) {
+        if (line[i] > 0) {
+            return 1;
         }
-        while (1) {
-            matches = get_int_input("Matches: ");
-            if (matches >= 1 && matches <= info->Max[0]) {
-                break;
-            } else {
-                print("Error: this number of matches is out of range\n");
-            }
-        }
-        return 0;
     }
+    return 0;
 }
 
+int gameplay(info_t *info)
+{
+    while (1) {
+        print_board(info->board, info->ligne);
+        print("Your turn:\n");
+        player_turn(info);
+        if (check_victory(info) == 1) {
+            print("You lost, too bad...\n");
+            return 2;
+        }
+        ai_turn(info);
+        if (check_victory(info) == 1) {
+            print("I lost... snif... but I'll get you next time!!\n");
+            return 1;
+        }
+    }
+}

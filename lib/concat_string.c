@@ -5,7 +5,7 @@
 ** concat_string.c
 */
 
-#include "../include/my.h" 
+#include "../include/my.h"
 
 char *concat_strings(char *dest, char *src)
 {
@@ -26,4 +26,3 @@ char *concat_strings(char *dest, char *src)
     copy[lend + lens] = '\0';
     return copy;
 }
-
