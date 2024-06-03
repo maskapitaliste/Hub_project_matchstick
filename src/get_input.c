@@ -41,7 +41,7 @@ int get_valid_line(info_t *info)
 
 int get_valid_matches(info_t *info, int line)
 {
-    int matches;
+    int matches = 0;
 
     while (1) {
         matches = get_int_input("Matches:");
@@ -59,6 +59,6 @@ void player_turn(info_t *info)
     int line = get_valid_line(info);
     int matches = get_valid_matches(info, line);
 
-    removes(info, line, matches);
-    print("Player removed %d match(es) from line %d\n", matches, line);
+    removes(info, line, (matches - 3));
+    print("Player removed %d match(es) from line %d\n", matches, line + 1);
 }

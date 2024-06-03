@@ -26,6 +26,9 @@ void find_optimal_move(info_t *info, int nim_sum, int *best_line, int *b_m)
         if (target_matches < info->matches[i]) {
             *best_line = i;
             *b_m = info->matches[i] - target_matches;
+            if (*b_m > info->Max) {
+                *b_m = info->Max;
+            }
             break;
         }
     }
