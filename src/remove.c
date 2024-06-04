@@ -21,5 +21,5 @@ int removes(info_t *info, int line, int matches)
         }
         i--;
     }
-    return match_count >= matches ? 0 : -1;
+    return match_count;
 }

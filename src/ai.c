@@ -59,7 +59,6 @@ void ai_turn(info_t *info)
     print("\nAI's turn...\n");
     srand(time(NULL));
     find_best_move(info, &l, &m);
-    if (removes(info, l, m) == 0) {
-        print("AI removed %d match(es) from line %d\n", m, l + 1);
-    }
+    removes(info, l, m);
+    print("AI removed %d match(es) from line %d\n", m, l + 1);
 }

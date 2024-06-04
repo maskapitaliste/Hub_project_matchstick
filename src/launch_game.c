@@ -19,6 +19,19 @@ void initialize_line(int *line, int line_number, int t_l, int *matches)
     }
 }
 
+int **copy_board(int **original_board, int lines)
+{
+    int **new_board = malloc(sizeof(int *) * lines);
+
+    for (int i = 0; i < lines; i++) {
+        new_board[i] = malloc(sizeof(int) * (lines * 2 - 1));
+        for (int j = 0; j < lines * 2 - 1; j++) {
+            new_board[i][j] = original_board[i][j];
+        }
+    }
+    return new_board;
+}
+
 info_t launch_game(int argc, char **argv)
 {
     info_t info;
@@ -36,5 +49,6 @@ info_t launch_game(int argc, char **argv)
     info.ligne = lines;
     info.board = board;
     info.matches = matches;
+    info.orginal_board = copy_board(board, lines);
     return info;
 }

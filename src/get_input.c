@@ -45,11 +45,10 @@ int get_valid_matches(info_t *info, int line)
 
     while (1) {
         matches = get_int_input("Matches:");
-        if (v_c_match(info, matches) && removes(info, line, matches) == 0) {
+        if (v_c_match(info, matches)) {
             return matches;
         } else {
-            print("Error: invalid match count or ");
-            print("not enough matches on this line\n");
+            print("Error: invalid match count\n");
         }
     }
 }
@@ -58,7 +57,7 @@ void player_turn(info_t *info)
 {
     int line = get_valid_line(info);
     int matches = get_valid_matches(info, line);
+    int count = removes(info, line, (matches));
 
-    removes(info, line, (matches - 4));
-    print("Player removed %d match(es) from line %d\n", matches, line + 1);
+    print("Player removed %d match(es) from line %d\n", count, line + 1);
 }

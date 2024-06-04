@@ -20,7 +20,6 @@ int c_match(int *line, int length)
 int gameplay(info_t *info)
 {
     print_board(info->board, info->ligne);
-
     while (1) {
         print("\nYour turn:\n");
         player_turn(info);

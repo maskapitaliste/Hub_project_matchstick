@@ -18,6 +18,7 @@
 typedef struct info {
     int Max;
     int ligne;
+    int **orginal_board;
     int **board;
     int *matches;
 } info_t;
@@ -56,5 +57,6 @@ int is_valid_line(info_t *info, int line);
 int is_valid_number(char *buffer);
 void player_turn(info_t *info);
 int c_match(int *line, int length);
+int add_matchs(info_t *info, int line, int matches);
 
 #endif
