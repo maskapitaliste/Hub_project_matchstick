@@ -4,51 +4,39 @@
 ** File description:
 ** ai.c
 */
-
 #include "../include/my.h"
 
-int calculate_nim_sum(int *matches, int lines)
+void make_total_even(info_t *info, int *l, int *m)
 {
-    int nim_sum = 0;
-
-    for (int i = 0; i < lines; i++) {
-        nim_sum ^= matches[i];
-    }
-    return nim_sum;
-}
-
-void find_optimal_move(info_t *info, int nim_sum, int *best_line, int *b_m)
-{
-    int target_matches;
+    int max_line = -1;
+    int max_matches = -1;
 
     for (int i = 0; i < info->ligne; i++) {
-        target_matches = info->matches[i] ^ nim_sum;
-        if (target_matches < info->matches[i]) {
-            *best_line = i;
-            *b_m = info->matches[i] - target_matches;
-            if (*b_m > info->Max) {
-                *b_m = info->Max;
-            }
-            break;
+        if (info->matches[i] > max_matches) {
+            max_matches = info->matches[i];
+            max_line = i;
+        }
+    }
+    if (max_matches > 1) {
+        *l = max_line;
+        *m = (max_matches % 2 == 0) ? max_matches - 1 : max_matches;
+        if (*m > info->Max) {
+            *m = info->Max;
+        }
+        return;
+    }
+    for (int i = 0; i < info->ligne; i++) {
+        if (info->matches[i] > 0) {
+            *l = i;
+            *m = (info->matches[i] < info->Max) ? info->matches[i] : info->Max;
+            return;
         }
     }
 }
 
-void find_best_move(info_t *info, int *best_line, int *best_matches)
+void find_best_move(info_t *info, int *l, int *m)
 {
-    int nim_sum = calculate_nim_sum(info->matches, info->ligne);
-
-    if (nim_sum == 0) {
-        do {
-            *best_line = rand() % info->ligne;
-        } while (info->matches[*best_line] == 0);
-        *best_matches = (rand() % info->Max) + 1;
-        if (*best_matches > info->matches[*best_line]) {
-            *best_matches = info->matches[*best_line];
-        }
-    } else {
-        find_optimal_move(info, nim_sum, best_line, best_matches);
-    }
+    make_total_even(info, l, m);
 }
 
 void ai_turn(info_t *info)

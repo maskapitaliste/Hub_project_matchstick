@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         print("USAGE\n ./matchstick lines max_matches");
         print("\n\n DESCRIPTION\n lines number of lines of ");
         print("the game, greater than 1\n max_matches maximum");
-        print("number of matches that can be taken out each");
+        print("number of matches that can be taken out each ");
         print("turn\n");
         return (84);
     }
